@@ -328,8 +328,9 @@
 
 <p><img src="after-patch.png" alt="patch之后的样子" title="patch之后的样子"></p>
 <p>然后是cave,溜溜梅写的,我不懂汇编.</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">addr:000000018001760C; 一堆00 -&gt; 	48 83 EC 20 48 8B 4C 24 40 FF 15 15 0A 00 00 0A 48 83 C4 20 48 8D 0D C2 2F E9 82 38 FF FF </span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">addr:000000018001760C; 一堆00 -&gt; 	48 83 EC 20 48 8B 4C 24 40 FF 15 15 0A 00 00 48 83 C4 20 48 8D 0D C2 2F 00 00 E9 82 38 FF FF</span><br></pre></td></tr></table></figure>
 
+<p>(另外,我复制这个patch没复制明白.这里有几个00我一开始没复制上.)</p>
 <p><img src="cave.png" alt="cave的样子" title="cave的样子"></p>
 <p>IDA做了一些解析,实际上就是:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.text:000000018001760C                 sub     rsp, 20h ; 分配shadow space,保持栈对齐</span><br><span class="line">.text:0000000180017610                 mov     rcx, [rsp+40h] ; 读取lpPathName,本来是+20h,因为shadow space所以是+40h</span><br><span class="line">.text:0000000180017615                 call    cs:SetDllDirectoryW</span><br><span class="line">.text:000000018001761B                 add     rsp, 20h ; 平栈</span><br><span class="line">.text:000000018001761F                 lea     rcx, unk_18001A5E8 ; 恢复被破坏的指令</span><br><span class="line">.text:0000000180017626                 jmp     loc_18000AEAD ; 跳回去.</span><br></pre></td></tr></table></figure>
