@@ -8,11 +8,11 @@
 <title>[琵琶曲]IDAPython(9.3) vs Conda · MathTangent&#39;s Blog</title>
 
 <meta name="theme-color" content="#0b0d10">
-<link rel="canonical" href="http://example.com/2026/10/27/%E7%90%B5%E7%90%B6%E6%9B%B2-IDAPython-9-3-vs-Conda/">
+<link rel="canonical" href="http://redleaf1221.github.io/2026/10/27/%E7%90%B5%E7%90%B6%E6%9B%B2-IDAPython-9-3-vs-Conda/">
 <meta property="og:type" content="article">
 <meta property="og:title" content="[琵琶曲]IDAPython(9.3) vs Conda · MathTangent&#39;s Blog">
 <meta property="og:site_name" content="MathTangent&#39;s Blog">
-<meta property="og:url" content="http://example.com/2026/10/27/%E7%90%B5%E7%90%B6%E6%9B%B2-IDAPython-9-3-vs-Conda/">
+<meta property="og:url" content="http://redleaf1221.github.io/2026/10/27/%E7%90%B5%E7%90%B6%E6%9B%B2-IDAPython-9-3-vs-Conda/">
 <meta property="article:published_time" content="2026-10-27T02:17:37.000Z">
 <link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="/css/term.css">
@@ -261,6 +261,8 @@
     <div class="post-meta">
       <span class="meta-item">发布于 <time datetime="2026-10-27T02:17:37.000Z">2026-10-27</time></span>
       
+      <span class="meta-item">更新于 <time datetime="2026-10-27T03:47:41.000Z">2026-10-27</time></span>
+      
       <span class="meta-item">约 4 分钟</span>
     </div>
     
@@ -283,7 +285,7 @@
 <p><img src="%E4%BD%95%E6%84%8F%E5%91%B3.png" alt="IDA提示Python3TargetDLL value is not set" title="何意味"></p>
 <p>我认为我设定的注册表路径没问题,指向一个可用的python3.dll,但是IDA Pro依然认为我没有设定它.</p>
 <p>好,现在该开始用IDA Pro逆向IDA Pro了.</p>
-<h2 id="意为何"><a href="#意为何" class="headerlink" title="意为何"></a>意为何</h2><p>用IDA打开plugins&#x2F;idapython3.dll,直接通过字符串定位到如下片段:</p>
+<h2 id="意为何"><a href="#意为何" class="headerlink" title="意为何"></a>意为何</h2><p>用IDA打开<code>plugins/idapython3.dll</code>,直接通过字符串定位到如下片段:</p>
 <p><img src="F5x1.png" alt="弹窗触发位置" title="sub_1800091E0的末尾"></p>
 <details>
 
@@ -322,15 +324,23 @@
 <p>但是这些函数之间真的很紧,几乎没地方.于是我选中了<code>.text</code>段的末尾.</p>
 <p>在<code>LoadLibraryW</code>前选一个好位置插入向cave的jmp.</p>
 <p><img src="before-patch.png" alt="patch之前的样子" title="patch之前的样子"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">addr:000000018000AEA6 len:0x7 orig: 48 8D 0D 3B F7 00 00 pat: E9 61 C7 00 00 90 90</span><br></pre></td></tr></table></figure>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">addr:000000018000AEA6; 48 8D 0D 3B F7 00 00 -&gt; E9 61 C7 00 00 90 90</span><br></pre></td></tr></table></figure>
 
 <p><img src="after-patch.png" alt="patch之后的样子" title="patch之后的样子"></p>
 <p>然后是cave,溜溜梅写的,我不懂汇编.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">addr:000000018001760C; 一堆00 -&gt; 	48 83 EC 20 48 8B 4C 24 40 FF 15 15 0A 00 00 0A 48 83 C4 20 48 8D 0D C2 2F E9 82 38 FF FF </span><br></pre></td></tr></table></figure>
+
 <p><img src="cave.png" alt="cave的样子" title="cave的样子"></p>
 <p>IDA做了一些解析,实际上就是:</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">.text:000000018001760C                 sub     rsp, 20h ; 分配shadow space,保持栈对齐</span><br><span class="line">.text:0000000180017610                 mov     rcx, [rsp+40h] ; 读取lpPathName,本来是+20h,因为shadow space所以是+40h</span><br><span class="line">.text:0000000180017615                 call    cs:SetDllDirectoryW</span><br><span class="line">.text:000000018001761B                 add     rsp, 20h ; 平栈</span><br><span class="line">.text:000000018001761F                 lea     rcx, unk_18001A5E8 ; 恢复被破坏的指令</span><br><span class="line">.text:0000000180017626                 jmp     loc_18000AEAD ; 跳回去.</span><br></pre></td></tr></table></figure>
 
 <p>保存,别忘了<code>Apply patches to input file</code>,弹窗消失了,<code>idapython</code>能用了.</p>
+<h2 id="合议味"><a href="#合议味" class="headerlink" title="合议味"></a>合议味</h2><p>在这次修复完成几个月后,IDA Pro 9.4发布了,更新日志里有一条:</p>
+<blockquote>
+<p>idapython: detect&#x2F;support pythons managed by uv&#x2F;anaconda&#x2F;homebrew</p>
+</blockquote>
+<p>这个存在了高达一个小版本的bug被官方修了.</p>
+<p>不过依旧是全网首发…?</p>
 
       </div>
     </div>
@@ -338,7 +348,7 @@
     <aside class="toc-rail" aria-label="目录">
       <div class="toc-card">
         <div class="toc-head">目录</div>
-        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%95%E6%84%8F%E5%91%B3"><span class="toc-text">何意味</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%84%8F%E4%B8%BA%E4%BD%95"><span class="toc-text">意为何</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BD%95%E6%84%8F"><span class="toc-text">为何意</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%84%8F%E4%BD%95%E4%B8%BA"><span class="toc-text">意何为</span></a></li></ol>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%95%E6%84%8F%E5%91%B3"><span class="toc-text">何意味</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%84%8F%E4%B8%BA%E4%BD%95"><span class="toc-text">意为何</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BA%E4%BD%95%E6%84%8F"><span class="toc-text">为何意</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%84%8F%E4%BD%95%E4%B8%BA"><span class="toc-text">意何为</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%90%88%E8%AE%AE%E5%91%B3"><span class="toc-text">合议味</span></a></li></ol>
       </div>
     </aside>
     
