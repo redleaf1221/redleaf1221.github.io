@@ -1,0 +1,415 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" data-theme="dark">
+<head>
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>纳米采音-All You Need Is Matching Pursuit · MathTangent&#39;s Blog</title>
+
+<meta name="theme-color" content="#0b0d10">
+<link rel="canonical" href="http://redleaf1221.github.io/2026/11/13/Projects/%E7%BA%B3%E7%B1%B3%E9%87%87%E9%9F%B3-All-You-Need-Is-Matching-Pursuit/">
+<meta property="og:type" content="article">
+<meta property="og:title" content="纳米采音-All You Need Is Matching Pursuit · MathTangent&#39;s Blog">
+<meta property="og:site_name" content="MathTangent&#39;s Blog">
+<meta property="og:url" content="http://redleaf1221.github.io/2026/11/13/Projects/%E7%BA%B3%E7%B1%B3%E9%87%87%E9%9F%B3-All-You-Need-Is-Matching-Pursuit/">
+<meta property="article:published_time" content="2026-11-13T10:36:12.000Z">
+<link rel="icon" href="/images/favicon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="/css/term.css">
+<style>:root{--accent: #5ad1c8;}</style>
+<script>
+  (function () {
+    try {
+      var stored = window.localStorage.getItem('term-theme');
+      var prefersLight = window.matchMedia('(prefers-color-scheme: light)').matches;
+      document.documentElement.setAttribute('data-theme', stored || (prefersLight ? 'light' : 'dark'));
+    } catch (e) { /* no-op */ }
+  })();
+</script>
+<meta name="generator" content="Hexo 8.1.2">
+
+</head>
+<body class="t-post" data-home-title="首页" data-close-label="关闭" data-page-kind="post">
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="app-shell">
+    <header class="topbar">
+  <div class="topbar-left">
+    <button class="icon-btn sidebar-toggle" type="button" data-sidebar-toggle aria-label="全部文章" aria-expanded="false">
+      
+
+<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+
+
+    </button>
+
+    <a class="brand" href="/">
+      
+      <img class="brand-avatar" src="/icon.jpg" alt="" width="30" height="30" loading="lazy">
+      
+      <span class="brand-name">MathTangent&#39;s Blog</span>
+    </a>
+
+    <nav class="site-nav" data-nav>
+      
+      <a class="nav-link is-active" href="/articles/" data-nav-key="articles">
+        
+
+<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7.2A1.7 1.7 0 0 1 4.7 5.5h4.1l1.9 2.4h8.6A1.7 1.7 0 0 1 21 9.6v7.7a1.7 1.7 0 0 1-1.7 1.7H4.7A1.7 1.7 0 0 1 3 17.3z"/></svg>
+
+
+        <span class="nav-text">文章</span>
+      </a>
+      
+      <a class="nav-link" href="/friends/" data-nav-key="friends">
+        
+
+<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8.5" r="3.2"/><path d="M3.5 19.5c0-3.2 2.5-5.4 5.5-5.4s5.5 2.2 5.5 5.4"/><path d="M16 6.2a3.2 3.2 0 0 1 0 6.1"/><path d="M17.6 14.4c1.9.5 3.1 2.1 3.1 4.2"/></svg>
+
+
+        <span class="nav-text">友链</span>
+      </a>
+      
+      <a class="nav-link" href="/about/" data-nav-key="about">
+        
+
+<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.4"/><path d="M4.8 20c0-3.6 3.2-6 7.2-6s7.2 2.4 7.2 6"/></svg>
+
+
+        <span class="nav-text">关于</span>
+      </a>
+      
+    </nav>
+  </div>
+
+  <div class="topbar-right">
+    
+    <a class="icon-btn" href="https://www.github.com/redleaf1221" target="_blank" rel="noopener noreferrer" aria-label="GitHub">
+      <svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 22v-4a4 4 0 0 0-1.2-3.1c3.9-.4 5.2-2.6 5.2-5.6a5.5 5.5 0 0 0-1.5-3.8 4.7 4.7 0 0 0-.1-3.6s-1.1-.3-3.6 1.3a13 13 0 0 0-6.6 0C4.7 1.6 3.6 1.9 3.6 1.9a4.7 4.7 0 0 0-.1 3.6A5.5 5.5 0 0 0 2 9.3c0 3 1.3 5.2 5.2 5.6A4 4 0 0 0 6 17.7V22"/><path d="M9 19c-2.5.8-3-1.5-4.5-2"/></svg>
+    </a>
+    
+    <button class="icon-btn" type="button" data-theme-toggle aria-label="Toggle theme">
+      
+
+<svg class="icon icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.2M12 19.3v2.2M2.5 12h2.2M19.3 12h2.2M5.2 5.2l1.6 1.6M17.2 17.2l1.6 1.6M18.8 5.2l-1.6 1.6M6.8 17.2l-1.6 1.6"/></svg>
+
+
+      
+
+<svg class="icon icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20 14.5A8.2 8.2 0 0 1 9.5 4a8.5 8.5 0 1 0 10.5 10.5z"/></svg>
+
+
+    </button>
+  </div>
+</header>
+
+
+    <div class="app-body">
+      
+<aside class="sidebar" data-sidebar aria-label="全部文章">
+  <a class="sidebar-head" href="/articles/" data-path="/articles/">
+    
+
+<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="4" width="6.5" height="6.5" rx="1.2"/><rect x="13.5" y="4" width="6.5" height="6.5" rx="1.2"/><rect x="4" y="13.5" width="6.5" height="6.5" rx="1.2"/><rect x="13.5" y="13.5" width="6.5" height="6.5" rx="1.2"/></svg>
+
+
+    <span class="sidebar-title">全部文章</span>
+    <span class="sidebar-total">4</span>
+  </a>
+
+  <a class="sidebar-head sidebar-alt" href="/tags/" data-path="/tags/">
+    
+
+<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.4 13.3 13 20.7a2 2 0 0 1-2.8 0L3 13.5V3.9h9.6l7.8 7.8a1.6 1.6 0 0 1 0 1.6z"/><circle cx="7.6" cy="7.6" r="1.2"/></svg>
+
+
+    <span class="sidebar-title">按标签检索</span>
+    <span class="sidebar-total">7</span>
+  </a>
+
+  <label class="sidebar-search">
+    
+
+<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="6"/><path d="m16 16 4.5 4.5"/></svg>
+
+
+    <input type="search" placeholder="搜索文章…" data-search autocomplete="off" spellcheck="false">
+  </label>
+
+  
+  <nav class="sidebar-nav" data-sidebar-nav>
+    <ul class="tree tree-root">
+  
+  <li class="tree-node is-collapsed" data-tree-key="CTF">
+    
+    <button class="tree-row tree-folder" type="button" data-tree-toggle aria-expanded="false">
+      
+
+<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7.2A1.7 1.7 0 0 1 4.7 5.5h4.1l1.9 2.4h8.6A1.7 1.7 0 0 1 21 9.6v7.7a1.7 1.7 0 0 1-1.7 1.7H4.7A1.7 1.7 0 0 1 3 17.3z"/></svg>
+
+
+      <span class="tree-name">CTF</span>
+      <span class="tree-count">1</span>
+      <span class="tree-caret" aria-hidden="true">
+
+<svg class="icon chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m9.5 6 6 6-6 6"/></svg>
+
+</span>
+    </button>
+
+    <div class="tree-children" data-tree-children>
+      
+      
+      <a class="tree-post" href="/2026/10/26/CTF/TSCTF-J-2026%E9%87%8D%E7%94%9F%E4%B9%8B%E6%88%91%E6%9C%89%E6%BA%9C%E6%BA%9C%E6%A2%85%E7%B3%BB%E7%BB%9F/" data-post-path="/2026/10/26/CTF/TSCTF-J-2026%E9%87%8D%E7%94%9F%E4%B9%8B%E6%88%91%E6%9C%89%E6%BA%9C%E6%BA%9C%E6%A2%85%E7%B3%BB%E7%BB%9F/" title="TSCTF-J 2026重生之我有溜溜梅系统">
+  
+
+<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 3.5h7L19 9v11a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 5 20V5a1.5 1.5 0 0 1 1.5-1.5z"/><path d="M13.5 3.5V9H19"/></svg>
+
+
+  <span class="tree-post-title">TSCTF-J 2026重生之我有溜溜梅系统</span>
+  <time class="tree-post-date" datetime="2026-10-26T11:20:18.000Z">2026-10-26</time>
+</a>
+
+      
+    </div>
+    
+  </li>
+  
+  <li class="tree-node is-collapsed" data-tree-key="Projects">
+    
+    <button class="tree-row tree-folder" type="button" data-tree-toggle aria-expanded="false">
+      
+
+<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7.2A1.7 1.7 0 0 1 4.7 5.5h4.1l1.9 2.4h8.6A1.7 1.7 0 0 1 21 9.6v7.7a1.7 1.7 0 0 1-1.7 1.7H4.7A1.7 1.7 0 0 1 3 17.3z"/></svg>
+
+
+      <span class="tree-name">Projects</span>
+      <span class="tree-count">2</span>
+      <span class="tree-caret" aria-hidden="true">
+
+<svg class="icon chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m9.5 6 6 6-6 6"/></svg>
+
+</span>
+    </button>
+
+    <div class="tree-children" data-tree-children>
+      
+      
+      <a class="tree-post" href="/2026/11/13/Projects/%E7%BA%B3%E7%B1%B3%E9%87%87%E9%9F%B3-All-You-Need-Is-Matching-Pursuit/" data-post-path="/2026/11/13/Projects/%E7%BA%B3%E7%B1%B3%E9%87%87%E9%9F%B3-All-You-Need-Is-Matching-Pursuit/" title="纳米采音-All You Need Is Matching Pursuit">
+  
+
+<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 3.5h7L19 9v11a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 5 20V5a1.5 1.5 0 0 1 1.5-1.5z"/><path d="M13.5 3.5V9H19"/></svg>
+
+
+  <span class="tree-post-title">纳米采音-All You Need Is Matching Pursuit</span>
+  <time class="tree-post-date" datetime="2026-11-13T10:36:12.000Z">2026-11-13</time>
+</a>
+
+      
+      <a class="tree-post" href="/2026/10/27/Projects/%E7%90%B5%E7%90%B6%E6%9B%B2-IDAPython-9-3-vs-Conda/" data-post-path="/2026/10/27/Projects/%E7%90%B5%E7%90%B6%E6%9B%B2-IDAPython-9-3-vs-Conda/" title="[琵琶曲]IDAPython(9.3) vs Conda">
+  
+
+<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 3.5h7L19 9v11a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 5 20V5a1.5 1.5 0 0 1 1.5-1.5z"/><path d="M13.5 3.5V9H19"/></svg>
+
+
+  <span class="tree-post-title">[琵琶曲]IDAPython(9.3) vs Conda</span>
+  <time class="tree-post-date" datetime="2026-10-27T02:17:37.000Z">2026-10-27</time>
+</a>
+
+      
+    </div>
+    
+  </li>
+  
+  <li class="tree-node is-collapsed" data-tree-key="sh1t">
+    
+    <button class="tree-row tree-folder" type="button" data-tree-toggle aria-expanded="false">
+      
+
+<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7.2A1.7 1.7 0 0 1 4.7 5.5h4.1l1.9 2.4h8.6A1.7 1.7 0 0 1 21 9.6v7.7a1.7 1.7 0 0 1-1.7 1.7H4.7A1.7 1.7 0 0 1 3 17.3z"/></svg>
+
+
+      <span class="tree-name">sh1t</span>
+      <span class="tree-count">1</span>
+      <span class="tree-caret" aria-hidden="true">
+
+<svg class="icon chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m9.5 6 6 6-6 6"/></svg>
+
+</span>
+    </button>
+
+    <div class="tree-children" data-tree-children>
+      
+      
+      <a class="tree-post" href="/2026/10/26/sh1t/%E4%B8%A5%E8%82%83%E6%90%AD%E5%BB%BAblog%E4%B8%AD/" data-post-path="/2026/10/26/sh1t/%E4%B8%A5%E8%82%83%E6%90%AD%E5%BB%BAblog%E4%B8%AD/" title="严肃搭建blog中">
+  
+
+<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6.5 3.5h7L19 9v11a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 5 20V5a1.5 1.5 0 0 1 1.5-1.5z"/><path d="M13.5 3.5V9H19"/></svg>
+
+
+  <span class="tree-post-title">严肃搭建blog中</span>
+  <time class="tree-post-date" datetime="2026-10-26T09:23:16.000Z">2026-10-26</time>
+</a>
+
+      
+    </div>
+    
+  </li>
+  
+  
+</ul>
+
+  </nav>
+  
+
+  <div class="sidebar-foot">
+    <a class="sidebar-foot-link" href="/archives/">归档</a>
+  </div>
+</aside>
+
+      <div class="sidebar-backdrop" data-sidebar-backdrop></div>
+      <div class="content-col">
+        
+<div class="tabbar" data-tabbar>
+  <div class="tabbar-track" data-tabs>
+    
+    <div class="tab is-active" data-tab data-tab-path="/2026/11/13/Projects/%E7%BA%B3%E7%B1%B3%E9%87%87%E9%9F%B3-All-You-Need-Is-Matching-Pursuit/">
+      <a class="tab-link" href="/2026/11/13/Projects/%E7%BA%B3%E7%B1%B3%E9%87%87%E9%9F%B3-All-You-Need-Is-Matching-Pursuit/" data-tab-link>
+        <span class="tab-dot" aria-hidden="true"></span>
+        <span class="tab-title">纳米采音-All You Need Is Matching Pursuit</span>
+      </a>
+      <button class="tab-close" type="button" data-tab-close aria-label="关闭">×</button>
+    </div>
+    
+  </div>
+</div>
+
+        <main class="content" id="main" data-tab-pane data-page-kind="post" data-tab-title="纳米采音-All You Need Is Matching Pursuit">
+          
+<article class="post">
+  <nav class="crumbs">
+    <a href="/articles/">文章</a>
+    
+    <span class="crumb-sep">/</span><span class="crumb-current">Projects</span>
+    
+  </nav>
+
+  <header class="post-head">
+    <h1 class="post-title">纳米采音-All You Need Is Matching Pursuit</h1>
+    <div class="post-meta">
+      <span class="meta-item">发布于 <time datetime="2026-11-13T10:36:12.000Z">2026-11-13</time></span>
+      
+      <span class="meta-item">约 3 分钟</span>
+    </div>
+    
+    <div class="post-tags">
+      <a class="chip chip-tag" href="/tags/sh1t/">#sh1t</a><a class="chip chip-tag" href="/tags/ai/">#ai</a>
+    </div>
+    
+  </header>
+
+  <div class="article-grid has-toc">
+    <div class="post-main">
+      
+      <div class="post-lead"><p>DSP好啊,DSP得学.</p>
+</div>
+      
+      <div class="post-body" id="post-body">
+        <h2 id="纳米采音"><a href="#纳米采音" class="headerlink" title="纳米采音"></a>纳米采音</h2><p>我向<a target="_blank" rel="noopener" href="https://zh.wikipedia.org/zh-hans/%E5%A4%A7%E5%9E%8B%E8%AF%AD%E8%A8%80%E6%A8%A1%E5%9E%8B">溜溜梅</a>许愿.</p>
+<blockquote>
+<p>你可以操控一个只能播放一种音效,比如底鼓或者镲片的工具,你能做到的只有给出一个触发它的时间点序列和强度序列.你该如何用它近似地播放任意音频?</p>
+</blockquote>
+<p>她<sup class="fn-ref" id="fnref1"><a href="#fn1">1</a></sup>说:</p>
+<blockquote>
+<p>用”匹配追踪”的思路,把目标音频拆解为音效的原子.</p>
+</blockquote>
+<p>匹配追踪,由Mallat和Zhang于1992年提出,核心目的是将一个已知信号近似拆解为过完备字典中若干原子的加权求和,以此寻找与原信号最接近的稀疏解.</p>
+<h2 id="匹配追踪"><a href="#匹配追踪" class="headerlink" title="匹配追踪"></a>匹配追踪</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">1. 初始化：</span><br><span class="line">  设定初始残差 r₀ = 原始信号.</span><br><span class="line">  设定迭代次数 k = 0.</span><br><span class="line">2. 寻找最佳原子：</span><br><span class="line">  从过完备字典中寻找与当前残差内积最大的原子元素.</span><br><span class="line">3. 计算投影系数：</span><br><span class="line">  将当前残差投影到选中的原子上,得到该原子的权重系数.</span><br><span class="line">4. 更新残差：</span><br><span class="line">  从当前残差中减去该原子及其加权分量,得到新的残差.</span><br><span class="line">5. 迭代终止：</span><br><span class="line">  判断新残差是否小于设定的阈值,或者迭代次数是否达到预设上限,否则令 k = k+1 返回第 2 步继续迭代.</span><br></pre></td></tr></table></figure>
+
+<p>想必各位是看不懂这DSP味满满的解释的,我也看不懂.那么简单来说:</p>
+<p>匹配追踪是一个贪心算法,也就是说它在每步都尝试寻找放下原子效果最好的地方并直接不考虑后果地放下原子.</p>
+<p>至于如何找到这个位置,就是第二步.这里用到一个叫互相关的奇妙工具.把残差与原子逐点相乘再求和然后除以原子能量进行归一,便得到了这个原子在这个位置的<em>匹配程度</em>.</p>
+<p>但是这样不就是暴力地枚举每一个位置吗?的确,但我们有更聪明的方法.</p>
+<h2 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h2><h3 id="GPU"><a href="#GPU" class="headerlink" title="GPU"></a>GPU</h3><p>知名的比喻,CPU相当于1个院士,而GPU相当于1000个小学生<sup class="fn-ref" id="fnref2"><a href="#fn2">2</a></sup>.院士会算互相关,但要对整个音频百万采样点逐个算那当然不如小学生集群.</p>
+<h3 id="局部更新"><a href="#局部更新" class="headerlink" title="局部更新"></a>局部更新</h3><p>放下原子实际上不会影响整个音频.卷积有局域性,我们只需要对[t-L,t+L]进行更新.</p>
+<h3 id="并行化"><a href="#并行化" class="headerlink" title="并行化"></a>并行化</h3><p>同时,由于局域性,我们实际上可以把目标划分为多个区段,同时在每个区段内选出一个最大值.</p>
+<p>区段之间需要适量的重叠以避免原子被截断,所以还需要进行去重.</p>
+<h3 id="停止条件"><a href="#停止条件" class="headerlink" title="停止条件"></a>停止条件</h3><p>改进足够小,也就是<code>改进幅度/(原始残差能量+常数)&lt;阈值</code>,那个常数是为了防止除以0.</p>
+<p>实际上在这上面绕了很多圈子,比如我其实一直在用<code>这次改进/上次改进&lt;阈值</code>之类的,这会导致不稳定.</p>
+<p>那么,经过这些优化,我们便得到了<a target="_blank" rel="noopener" href="https://github.com/redleaf1221/NanoSynth">NanoSynth</a>.</p>
+<h2 id="升维"><a href="#升维" class="headerlink" title="升维!"></a>升维!</h2><p>把<code>conv1d</code>换成<code>conv2d</code>,这套算法便能用在图片上.</p>
+<p>而视频又是由一帧帧图片组成的,只要对每一帧跑匹配追踪然后拼起来,就可以用于视频.</p>
+<p>但这会带来平方级的计算量增长,必须使用更激进的优化.</p>
+<h2 id="继续优化"><a href="#继续优化" class="headerlink" title="继续优化"></a>继续优化</h2><h3 id="光流"><a href="#光流" class="headerlink" title="光流"></a>光流</h3><p>可以注意到视频的前后帧在大部分时间都是相差不大的,于是我们可以采用<a target="_blank" rel="noopener" href="https://www.nvidia.com/en-us/geforce/technologies/dlss/">大力水手</a>的祖宗光流法.将视频分为I帧与P帧.I帧进行完整的匹配追踪,而在P帧则使用光流法.光流法为图像中的每一个像素计算出一个位移,形成一个光流场.如果我们沿着光流场移动原子,就能大幅减少下一帧所需的原子数…吗?</p>
+<p>实际上,直接应用光流会导致很严重的质量损失.这是因为我们的P帧只会添加原子而不会减少原子.一些原子被推到了错误的地方,大量堆叠,形成十分骇人的高频噪声.后续的匹配追踪完全无法处理这些噪声.</p>
+<p>于是,我们需要在进入P帧时随机清除一些原子.这虽然增加了所需的事件数,但使得算法可以纠正自己左的错误<sup class="fn-ref" id="fnref3"><a href="#fn3">3</a></sup>.</p>
+<h3 id="金字塔"><a href="#金字塔" class="headerlink" title="金字塔"></a>金字塔</h3><blockquote>
+<p>并不是Made in 19 century, made in Atlantis or made in TESLA的那个.</p>
+</blockquote>
+<p>对于巨大的原子,一两个像素的偏差真的重要吗?</p>
+<p>我们可以缩小画面,缩小原子,如果画面缩小的比原子多,这就等价于放大原子.这会带来四次方级别的改进因为我们同时减少了原子的大小和原子移动的范围.</p>
+<h3 id="FFT"><a href="#FFT" class="headerlink" title="FFT"></a>FFT</h3><p>你可以去B站找个视频看之类的,总之在频域相乘对于时域卷积,所以先FFT到频域就能复用一些计算.</p>
+<p>于是,便有了<a target="_blank" rel="noopener" href="https://github.com/redleaf1221/NanoSynth2D">NanoSynth2D</a>.</p>
+
+<section class="footnotes"><ol>
+<li id="fn1"><p>虽然这个时候DeepSeek还没有变成大肥鱼就是了. <a class="fn-backref" href="#fnref1" aria-label="back">↩</a></p></li>
+<li id="fn2"><p>笔者想起了那个娶1个30岁的少妇是否等价于娶5个6岁的萝莉的梗图. <a class="fn-backref" href="#fnref2" aria-label="back">↩</a></p></li>
+<li id="fn3"><p>指光流法过于激进. <a class="fn-backref" href="#fnref3" aria-label="back">↩</a></p></li>
+</ol></section>
+      </div>
+    </div>
+    
+    <aside class="toc-rail" aria-label="目录">
+      <div class="toc-card">
+        <div class="toc-head">目录</div>
+        <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BA%B3%E7%B1%B3%E9%87%87%E9%9F%B3"><span class="toc-text">纳米采音</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8C%B9%E9%85%8D%E8%BF%BD%E8%B8%AA"><span class="toc-text">匹配追踪</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BC%98%E5%8C%96"><span class="toc-text">优化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#GPU"><span class="toc-text">GPU</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B1%80%E9%83%A8%E6%9B%B4%E6%96%B0"><span class="toc-text">局部更新</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B9%B6%E8%A1%8C%E5%8C%96"><span class="toc-text">并行化</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%81%9C%E6%AD%A2%E6%9D%A1%E4%BB%B6"><span class="toc-text">停止条件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%8D%87%E7%BB%B4"><span class="toc-text">升维!</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%BB%A7%E7%BB%AD%E4%BC%98%E5%8C%96"><span class="toc-text">继续优化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%89%E6%B5%81"><span class="toc-text">光流</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%87%91%E5%AD%97%E5%A1%94"><span class="toc-text">金字塔</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#FFT"><span class="toc-text">FFT</span></a></li></ol></li></ol>
+      </div>
+    </aside>
+    
+  </div>
+
+  <footer class="post-foot">
+    <div class="post-nav">
+      
+      
+      <a class="post-nav-link is-next" href="/2026/10/27/Projects/%E7%90%B5%E7%90%B6%E6%9B%B2-IDAPython-9-3-vs-Conda/">
+        <span class="post-nav-label">下一篇 →</span>
+        <span class="post-nav-title">[琵琶曲]IDAPython(9.3) vs Conda</span>
+      </a>
+      
+    </div>
+    
+    <a class="back-link" href="/articles/">← 文章</a>
+    
+  </footer>
+</article>
+
+        </main>
+      </div>
+    </div>
+
+    <footer class="site-footer">
+  <div class="footer-inner">
+    
+    <div class="footer-left">
+      <span class="footer-copy">© 2026 MathTangent</span>
+      
+      <span class="footer-dot">·</span>
+      <span class="footer-powered">由 Hexo + term 驱动</span>
+      
+      
+    </div>
+    <div class="footer-right">
+      
+      <a class="footer-link" href="/archives/">归档</a>
+      
+      <button class="footer-top" type="button" data-to-top aria-label="Back to top">↑</button>
+    </div>
+  </div>
+</footer>
+
+  </div>
+
+  <script src="/js/term.js" defer></script>
+
+</body>
+</html>
